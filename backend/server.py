@@ -32,6 +32,7 @@ def call_llama(question):
     """This function calls the Llama 13b API and sends a question  to it
     output: Answer from the model
     """
+    base_case = "My Name is Nimi and I am a Technical Recruiter that can write Java, Python and C. Link whatever question is asked to my profile and provide an answer."
     password = os.environ.get('REPLICATE_API_TOKEN')
 
     llama2_13b = "meta/llama-2-13b-chat:f4e2de70d66816a838a89eeeb621910adffb0dd0baba3976c96980970978018d"
@@ -39,11 +40,11 @@ def call_llama(question):
         model=llama2_13b,
         model_kwargs={"temperature": 0.01, "top_p": 1, "max_new_tokens":500}
     )
-    answer = llm(question)
+    answer = llm(base_case)
 
     """# chat history not passed so Llama doesn't have the context and doesn't know this is more about the book
     followup = "tell me more"
-    followup_answer = llm(followup)
+    followup_answer = llm(followup) """
 
     memory = ConversationBufferMemory()
     conversation = ConversationChain(
@@ -51,13 +52,13 @@ def call_llama(question):
         memory = memory,
         verbose=False
     )
-    answer = conversation.predict(input=question)
+    answer = conversation.predict(input=base_case)
 
     # pass context (previous question and answer) along with the follow up "tell me more" to Llama who now knows more of what
-    memory.save_context({"input": question},
+    memory.save_context({"input": base_case},
                         {"output": answer})
-    followup_answer = conversation.predict(input=followup)"""
-    return (answer)
+    followup_answer = conversation.predict(input=question)
+    return (followup_answer)
 
 
 if __name__ == '__main__':

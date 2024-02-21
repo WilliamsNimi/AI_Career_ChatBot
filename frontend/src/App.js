@@ -13,8 +13,8 @@ function App() {
         <textarea defaultValue= "Please enter your question here" rows="30" cols="100" id="prompt"/>
         <button type="submit" className="ask-Button" onClick={()=>displayResponse(setData)}>Ask</button>
         <p>----------------------------------------------------------------------------------------------------</p>
-        <div>
-          <p className="AI_responses" id="AI_responses">{data}</p>
+        <div className="AI_responses" >
+          <p id="AI_responses">{data}</p>
         </div>
       </div>
     </div>
