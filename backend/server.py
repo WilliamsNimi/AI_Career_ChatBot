@@ -18,14 +18,14 @@ cors = CORS(app)
 def make_query():
     """This function gets the query from the frontend"""
     query = request.get_json()
-    print(query)
-
+    return jsonify({'results':call_llama(query['query'])})
 
 
 @app.route('/')
 def index():
-    question = "Trial"
-    return jsonify({'results':call_llama(question)})
+    question = make_query()
+    print(question['query'])
+    return jsonify({'results':call_llama(question['query'])})
 
 def call_llama(question):
     """This function calls the Llama 13b API and sends a question  to it

@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
       // Using fetch to fetch the api from 
       // flask server it will be redirected to proxy
-      fetch("http://127.0.0.1:5000/").then((res) =>
+      fetch("http://127.0.0.1:5000/make_query").then((res) =>
           res.json().then((data) => {
               // Setting a data from api
               setData(data.results);
@@ -39,15 +39,19 @@ function App() {
 
 function displayResponse(path, data){
   console.log(JSON.stringify(document.getElementById('prompt').value))
-  return fetch('http://127.0.0.1:5000/make_query'),
+  return fetch('http://127.0.0.1:5000/make_query',
   {
     method: 'POST',
-    mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(document.getElementById('prompt').value)
-  }
+    body: JSON.stringify({"query": document.getElementById('prompt').value})
+  }).then((response)=> response.json())
+  .then((data)=>{console.log(data);
+  })
+  .catch((err)=>{
+    console.log(err.message);
+  });
 }
 
 export default App;
