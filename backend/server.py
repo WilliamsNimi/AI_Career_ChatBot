@@ -16,13 +16,14 @@ cors = CORS(app)
 
 @app.route('/make_query', methods=['POST', 'GET'])
 def make_query():
-    """This function gets the query from the frontend"""
+    """This function gets the query from the frontend and calls the call_llama function"""
     query = request.get_json()
     return jsonify({'results':call_llama(query['query'])})
 
 
 @app.route('/')
 def index():
+    """ This function will be deleted """
     question = make_query()
     print(question['query'])
     return jsonify({'results':call_llama(question['query'])})

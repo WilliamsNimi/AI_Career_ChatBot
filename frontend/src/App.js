@@ -9,8 +9,7 @@ function App() {
 
   // Using useEffect for single rendering
   useEffect(() => {
-      // Using fetch to fetch the api from 
-      // flask server it will be redirected to proxy
+      // Using fetch to fetch the api from flask server
       fetch("http://127.0.0.1:5000/make_query").then((res) =>
           res.json().then((data) => {
               // Setting a data from api
@@ -38,7 +37,7 @@ function App() {
 }
 
 function displayResponse(path, data){
-  console.log(JSON.stringify(document.getElementById('prompt').value))
+  // This function sends a post request to the server with the text area value as payload.
   return fetch('http://127.0.0.1:5000/make_query',
   {
     method: 'POST',
