@@ -14,11 +14,11 @@ app = Flask(__name__)
 cors = CORS(app)
 
 
-@app.route('/make_query', methods=['POST', 'GET'])
+@app.route('/query', methods=['POST', 'GET'])
 def make_query():
     """This function gets the query from the frontend and calls the call_llama function"""
     query = request.get_json()
-    return jsonify({'results':call_llama(query['query'])})
+    return jsonify({'results':call_llama(query['query'], query['firstname'], query['skills'])})
 
 
 @app.route('/')
@@ -28,11 +28,11 @@ def index():
     print(question['query'])
     return jsonify({'results':call_llama(question['query'])})
 
-def call_llama(question):
+def call_llama(question, firstname, skills):
     """This function calls the Llama 13b API and sends a question  to it
     output: Answer from the model
     """
-    base_case = "My Name is Nimi and I am a Technical Recruiter that can write Java, Python and C. Link whatever question is asked to my profile and provide an answer."
+    base_case = "My name is "+firstname+ " and I have the following skills " + skills
     password = os.environ.get('REPLICATE_API_TOKEN')
 
     llama2_13b = "meta/llama-2-13b-chat:f4e2de70d66816a838a89eeeb621910adffb0dd0baba3976c96980970978018d"

@@ -34,13 +34,27 @@
   font-size: calc(10px + 2vmin);
   color: #282c34;
 }
-.AI_responses {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.form-area {
+  background-color: white;
+  min-height: 100vh;
+  max-width:1000px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  color: #282c34;
+  margin-top: 30px;
+}
+.form-area input{
+  height:35px;
+}
+.AI_responses {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 800px;
+  align-items: left;
+  justify-content: left;
+  font-size: 20px;
   color: #282c34;
   padding-left: 200px;
   padding-right: 200px;
